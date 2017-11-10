@@ -1,15 +1,21 @@
 package baryczka.billofsale.model;
 
-//@Entity
-public class User {
+import javax.persistence.*;
+import java.io.Serializable;
 
-  //  @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+@Entity
+@Table(name = "user")
+public class User implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
-   // @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, name = "username")
     private String username;
 
+    @Column(nullable = false, unique = true, name = "password")
     private String password;
 
     public Long getId() {
@@ -33,12 +39,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public User(Long id, String username, String password) {
-        this.id = id;
-        this.username = username;
         this.password = password;
     }
 }

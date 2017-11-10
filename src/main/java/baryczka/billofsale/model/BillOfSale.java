@@ -1,14 +1,23 @@
 package baryczka.billofsale.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class BillOfSale {
+@Entity
+@Table(name = "bill_of_sale")
+public class BillOfSale implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "date")
     private Date date;
 
+    @OneToMany(mappedBy = "billOfSale", cascade = CascadeType.ALL)
     private List<BillItem> billItems;
 
     public Long getId() {

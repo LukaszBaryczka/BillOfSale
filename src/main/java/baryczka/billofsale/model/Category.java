@@ -1,9 +1,18 @@
 package baryczka.billofsale.model;
 
-public class Category {
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Entity
+@Table(name = "category")
+public class Category implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
     public Long getId() {

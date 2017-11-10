@@ -7,17 +7,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HelloController {
+public class StartController {
 
     @Autowired
     private IAuthenticationFacade authenticationFacade;
 
-    @GetMapping("/hello")
+    @GetMapping("/start")
     public String hello(Model model) {
         String currentPrincipalName = authenticationFacade.getAuthentication().getName();
 
         model.addAttribute("name", currentPrincipalName);
 
-        return "hello";
+        return "start";
     }
 }

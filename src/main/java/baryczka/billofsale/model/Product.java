@@ -1,11 +1,21 @@
 package baryczka.billofsale.model;
 
-public class Product {
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Entity
+@Table(name = "product")
+public class Product implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
+    @ManyToOne
     private Category category;
 
     public Long getId() {

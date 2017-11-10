@@ -1,6 +1,6 @@
 package baryczka.billofsale.config.security;
 
-import baryczka.billofsale.service.UserService;
+import baryczka.billofsale.service.security.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -13,6 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private static final String LOGIN_PAGE = "/login";
+    private static final String START_PAGE = "/start";
 
     @Autowired
     private UserService userDetailsService;
@@ -45,12 +48,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/hello")
-                    .failureUrl("/login")
+                    .loginPage(LOGIN_PAGE)
+                    .defaultSuccessUrl(START_PAGE)
+                    .failureUrl(LOGIN_PAGE)
                     .permitAll()
                     .and()
                 .logout()
-                    .logoutSuccessUrl("/login");
+                    .logoutSuccessUrl(LOGIN_PAGE);
     }
 }

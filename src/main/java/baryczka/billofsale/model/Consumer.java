@@ -1,9 +1,18 @@
 package baryczka.billofsale.model;
 
-public class Consumer {
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Entity
+@Table(name = "consumer")
+public class Consumer implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
     public Long getId() {

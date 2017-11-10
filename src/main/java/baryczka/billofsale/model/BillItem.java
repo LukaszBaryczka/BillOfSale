@@ -1,18 +1,38 @@
 package baryczka.billofsale.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
-public class BillItem {
+@Entity
+@Table(name = "bill_item")
+public class BillItem implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "product")
     private Product product;
 
+    @Column(name = "amount")
     private Integer amount;
 
+    @Column(name = "price_for_one")
     private Double priceForOne;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "bill_item_consumer",
+            joinColumns = {@JoinColumn(name = "bill_item_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "consumer_id", referencedColumnName = "id")})
     private List<Consumer> consumers;
+
+    @ManyToOne
+    @JoinColumn(name = "bill_of_sale")
+    private BillOfSale billOfSale;
 
     public Long getId() {
         return id;
@@ -52,5 +72,13 @@ public class BillItem {
 
     public void setConsumers(List<Consumer> consumers) {
         this.consumers = consumers;
+    }
+
+    public BillOfSale getBillOfSale() {
+        return billOfSale;
+    }
+
+    public void setBillOfSale(BillOfSale billOfSale) {
+        this.billOfSale = billOfSale;
     }
 }

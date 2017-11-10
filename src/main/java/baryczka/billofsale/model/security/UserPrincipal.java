@@ -1,12 +1,14 @@
-package baryczka.billofsale.service;
+package baryczka.billofsale.model.security;
 
 import baryczka.billofsale.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class UserPrincipal implements UserDetails {
+
     private User user;
 
     public UserPrincipal(User user) {
@@ -15,7 +17,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
